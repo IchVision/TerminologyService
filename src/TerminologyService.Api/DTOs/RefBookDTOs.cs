@@ -34,4 +34,4 @@ public record RefBookResponse(Guid Id, string Code, string Name, string? Descrip
 	public static RefBookResponse FromRefBook(RefBook value) => new(value.Id, value.Code, value.Name, value.Description);
 }
 
-public record ListRefBooksResponse(IEnumerable<RefBookResponse> RefBooks);
+public record RefBooksResponse(IEnumerable<RefBookResponse> RefBooks);

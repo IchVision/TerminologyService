@@ -1,5 +1,9 @@
 @TerminologyService.Api_HostAddress = http://localhost:5181
 
+@refBookId =
+@versionId =
+@elementId =
+
 ### Справочники
 
 ### Создать справочник
@@ -7,9 +11,9 @@ POST {{TerminologyService.Api_HostAddress}}/api/RefBooks
 Content-Type: application/json
 
 {
-  "code": "COUNTRIES",
-  "name": "Страны",
-  "description": "Справочник стран"
+"code": "COUNTRIES",
+"name": "Страны",
+"description": "Справочник стран"
 }
 
 ### Создать справочник без описания
@@ -17,9 +21,9 @@ POST {{TerminologyService.Api_HostAddress}}/api/RefBooks
 Content-Type: application/json
 
 {
-  "code": "CURRENCIES",
-  "name": "Валюты",
-  "description": null
+"code": "CURRENCIES",
+"name": "Валюты",
+"description": null
 }
 
 ### Получить список всех справочников
@@ -29,24 +33,120 @@ GET {{TerminologyService.Api_HostAddress}}/api/RefBooks
 GET {{TerminologyService.Api_HostAddress}}/api/RefBooks?date=2026-10-04
 
 ### Обновить справочник
-PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}
+PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{refBookId}}
 Content-Type: application/json
 
 {
-  "code": "COUNTRIES",
-  "name": "Страны мира",
-  "description": "Обновлённое описание справочника стран"
+"code": "COUNTRIES",
+"name": "Страны мира",
+"description": "Обновлённое описание справочника стран"
 }
 
 ### Обновить справочник без описания
-PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}
+PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{refBookId}}
 Content-Type: application/json
 
 {
-  "code": "COUNTRIES",
-  "name": "Страны",
-  "description": null
+"code": "COUNTRIES",
+"name": "Страны",
+"description": null
 }
 
 ### Удалить справочник
-DELETE {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}
+DELETE {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{refBookId}}
+
+### Версии справочника
+
+### Создать версию
+POST {{TerminologyService.Api_HostAddress}}/api/Versions
+Content-Type: application/json
+
+{
+"refBookId": "{{refBookId}}",
+"version": "1.0",
+"date": "2026-01-01"
+}
+
+### Создать версию без даты
+POST {{TerminologyService.Api_HostAddress}}/api/Versions
+Content-Type: application/json
+
+{
+"refBookId": "{{refBookId}}",
+"version": "2.0",
+"date": null
+}
+
+### Получить все версии справочника
+GET {{TerminologyService.Api_HostAddress}}/api/RefBooks/{{refBookId}}/versions
+
+### Обновить версию
+PUT {{TerminologyService.Api_HostAddress}}/api/Versions?id={{versionId}}
+Content-Type: application/json
+
+{
+"version": "1.1",
+"date": "2026-02-01"
+}
+
+### Обновить версию без даты
+PUT {{TerminologyService.Api_HostAddress}}/api/Versions?id={{versionId}}
+Content-Type: application/json
+
+{
+"version": "2.0",
+"date": null
+}
+
+### Удалить версию
+DELETE {{TerminologyService.Api_HostAddress}}/api/Versions?id={{versionId}}
+
+### Элементы
+
+### Создать элемент
+POST {{TerminologyService.Api_HostAddress}}/api/Elements
+Content-Type: application/json
+
+{
+"versionRefBookId": "{{versionId}}",
+"code": "RU",
+"value": "Россия"
+}
+
+### Создать элемент
+POST {{TerminologyService.Api_HostAddress}}/api/Elements
+Content-Type: application/json
+
+{
+"versionRefBookId": "{{versionId}}",
+"code": "US",
+"value": "США"
+}
+
+### Создать элемент
+POST {{TerminologyService.Api_HostAddress}}/api/Elements
+Content-Type: application/json
+
+{
+"versionRefBookId": "{{versionId}}",
+"code": "DE",
+"value": "Германия"
+}
+
+### Получить элементы актуальной версии
+GET {{TerminologyService.Api_HostAddress}}/api/RefBooks/{{refBookId}}/elements
+
+### Получить элементы конкретной версии
+GET {{TerminologyService.Api_HostAddress}}/api/RefBooks/{{refBookId}}/elements?version=1.0
+
+### Обновить элемент
+PUT {{TerminologyService.Api_HostAddress}}/api/Elements?id={{elementId}}
+Content-Type: application/json
+
+{
+"code": "RU",
+"value": "Российская Федерация"
+}
+
+### Удалить элемент
+DELETE {{TerminologyService.Api_HostAddress}}/api/Elements?id={{elementId}}

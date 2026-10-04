@@ -13,5 +13,10 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<RefBook>().HasIndex(x => x.Code).IsUnique();
+
+		modelBuilder.Entity<VersionRefBook>().HasIndex(x => new {x.RefBookId, x.Version }).IsUnique();
+		modelBuilder.Entity<VersionRefBook>().HasIndex(x => new {x.RefBookId, x.Date }).IsUnique();
+
+		modelBuilder.Entity<Element>().HasIndex(x => new { x.VersionRefBookId, x.Code }).IsUnique();
 	}
 }

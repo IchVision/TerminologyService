@@ -15,8 +15,8 @@ public static class ResultExtensions
 
 		return result.Error switch
 		{
-			Errors.DuplicateError => controller.Conflict(),
-			Errors.NotFound => controller.NotFound(),
+			Errors.DuplicateError => controller.StatusCode(409),
+			Errors.NotFound => controller.StatusCode(404),
 			_ => controller.StatusCode(500),
 		};
 	}

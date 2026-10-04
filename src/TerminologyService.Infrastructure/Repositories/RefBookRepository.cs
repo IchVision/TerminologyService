@@ -45,11 +45,7 @@ public class RefBookRepository(DataContext dataContext) : IRefBookRepository
 		}
 		catch (DbUpdateException ex) when (ex.IsUniqueViolation())
 		{
-			return Result.Failure<RefBook, Errors>(Errors.DuplicateError);
-		}
-		catch (Exception)
-		{
-			return Result.Failure<RefBook, Errors>(Errors.UnexpectedError);
+			return Errors.DuplicateError;
 		}
 
 		return value;
@@ -57,12 +53,21 @@ public class RefBookRepository(DataContext dataContext) : IRefBookRepository
 
 	public async Task<UnitResult<Errors>> UpdateRefBookAsync(RefBook value)
 	{
-		var affected = await _db.RefBooks
+		int affected = 0;
+
+		try
+		{
+			affected = await _db.RefBooks
 			.Where(x => x.Id == value.Id)
 			.ExecuteUpdateAsync(x => x
 				.SetProperty(x => x.Code, value.Code)
 				.SetProperty(x => x.Name, value.Name)
 				.SetProperty(x => x.Description, value.Description));
+		}
+		catch (DbUpdateException ex) when (ex.IsUniqueViolation())
+		{
+			return Errors.DuplicateError;
+		}
 
 		if (affected == 0)
 			return Errors.NotFound;
