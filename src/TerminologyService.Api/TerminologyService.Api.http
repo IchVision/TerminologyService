@@ -1,0 +1,52 @@
+@TerminologyService.Api_HostAddress = http://localhost:5181
+
+### Справочники
+
+### Создать справочник
+POST {{TerminologyService.Api_HostAddress}}/api/RefBooks
+Content-Type: application/json
+
+{
+  "code": "COUNTRIES",
+  "name": "Страны",
+  "description": "Справочник стран"
+}
+
+### Создать справочник без описания
+POST {{TerminologyService.Api_HostAddress}}/api/RefBooks
+Content-Type: application/json
+
+{
+  "code": "CURRENCIES",
+  "name": "Валюты",
+  "description": null
+}
+
+### Получить список всех справочников
+GET {{TerminologyService.Api_HostAddress}}/api/RefBooks
+
+### Получить список справочников на указанную дату
+GET {{TerminologyService.Api_HostAddress}}/api/RefBooks?date=2026-10-04
+
+### Обновить справочник
+PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}
+Content-Type: application/json
+
+{
+  "code": "COUNTRIES",
+  "name": "Страны мира",
+  "description": "Обновлённое описание справочника стран"
+}
+
+### Обновить справочник без описания
+PUT {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}
+Content-Type: application/json
+
+{
+  "code": "COUNTRIES",
+  "name": "Страны",
+  "description": null
+}
+
+### Удалить справочник
+DELETE {{TerminologyService.Api_HostAddress}}/api/RefBooks?id={{id}}

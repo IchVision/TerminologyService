@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/TerminologyService.Api/TerminologyService.Api.csproj" Id="cb41f59b-9309-4082-af37-59536fd8b727" />
+  <Project Path="src/TerminologyService.Application/TerminologyService.Application.csproj" Id="64a84b34-34b1-4710-b492-ebb2825fee9b" />
+  <Project Path="src/TerminologyService.Domain/TerminologyService.Domain.csproj" Id="990a6631-abc8-4384-af52-f9710dc24804" />
+  <Project Path="src/TerminologyService.Infrastructure/TerminologyService.Infrastructure.csproj" Id="aaa94c68-240d-44a8-83df-b673fa2152d8" />
+</Solution>
